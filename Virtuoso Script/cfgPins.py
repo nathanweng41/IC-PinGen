@@ -27,29 +27,29 @@ def main():
     i = 0
     group = PinGroup(1)
     for signal in topList:
-        group.add(BasePins(41.66667+i*41.66667,0,500,300,signal,1,"OI",2,10,"top","l_r",10,1,"inout"))
+        group.add(BasePins(41.66667+i*41.66667,0,500,300,signal,1,"OI",2,10,"top","l_r",10,1,"inputOutput"))
         i+=1
 
     i=0
     rightList=["ADC_OUT","ADC_OUT","ADC_OUT","ADC_OUT","ADC_OUT","ADC_OUT","ADC_OUT","ADC_OUT","INPUT1","INPUT2"]
     for signal in rightList:
         if signal == "ADC_OUT":
-            group.add((BasePins(0,27.27273+i*27.27273,500,300,signal,1,"JA",2,10,"right","b_t",10,10,"inout")))
+            group.add((BasePins(0,27.27273+i*27.27273,500,300,signal,1,"JA",2,10,"right","b_t",5,50,"inputOutput")))
             i+=1
         else:
-            group.add(BasePins(0,27.27273+i*27.27273,500,300,signal,1,"JA",2,10,"right","b_t",10,1,"inout"))
+            group.add(BasePins(0,27.27273+i*27.27273,500,300,signal,1,"JA",2,10,"right","b_t",5,1,"inputOutput"))
             i+=1
-
+            
     i=0
     leftList = ["DVDD","macro_aout","macro_dout"]
     for signal in leftList:
-        group.add(BasePins(0,75+i*75,500,300,signal,1,"OI",2,10,"left","b_t",10,1,"inout"))
+        group.add(BasePins(0,75+i*75,500,300,signal,1,"OI",2,10,"left","b_t",10,1,"inputOutput"))
         i+=1
 
     i=0
     bottomList = ["Ibias1u","AVDD2","VREF","VB_DELAY","VREAD","CTT_body","V1P1","VDD1p8","VDD_TIA2","VDD_TIA1","VDD_erase_BL_S","VDD_prg","VDD_prg_BL_US"]
     for signal in bottomList:
-        group.add(BasePins(35.71429+i*35.71429,0,500,300,signal,1,"OI",2,10,"bottom","l_r",10,1,"inout"))
+        group.add(BasePins(35.71429+i*35.71429,0,500,300,signal,1,"OI",2,10,"bottom","l_r",10,1,"inputOutput"))
         i+=1
 
     #output pins
