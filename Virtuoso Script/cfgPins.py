@@ -1,6 +1,7 @@
 
 from Pingroup import * 
 from pathlib import Path
+import pandas as pd
 
 def main():
 
@@ -17,10 +18,11 @@ def main():
     """
     #mp = pin_generator.mam_pins()
     current_file_name = Path(__file__).stem
-    out_fn = "C:/Virtuoso Script/output/"+current_file_name+"_out.txt"
+    out_fn = "C:/Users/natha/GitHub/IC-PinGen/output/"+current_file_name+"_out.txt"
 
     out_fh = open(out_fn,'w')
-
+    df = pd.read_csv('SigNames.csv')
+    #inout pins 
     topList = ["VSS","CLK1_PAD","CLK2_PAD","AVDD","VNEG0P6","VNEG","VNEG_erase","VIN_LDO1","VIN_LDO2","VDD_PRG_BL_S_SW","VDD_PRG_BL_S"]
     i = 0
     group = PinGroup(1)
@@ -49,8 +51,34 @@ def main():
     for signal in bottomList:
         group.add(BasePins(35.71429+i*35.71429,0,500,300,signal,1,"OI",2,10,"bottom","l_r",10,1,"inout"))
         i+=1
-    
+
+    #output pins
     i=0
+    outputList = ["ADC_TO_DIG","CLK_DIG_ROOT"]
+    for signal in outputList:
+        if signal == "ADC_TO_DIG":
+            group.add(BasePins(0,100+i*100,500,300,signal,16,"C2",.044,.2,"left","b_t",5,17,"output"))
+            i+=1
+        else:
+            group.add(BasePins(0,100+i*100,500,300,signal,1,"C2",.044,.2,"left","b_t",5,1,"output"))
+            i+=1
+    i=0
+    #input pins
+    #WL pin
+    group.add(BasePins(490,0,500,300,"WL",2048,"C1",0.044,0.046,"top","r_l",5,5000,"input"))
+    #leafclkpin on c1:
+    group.add(BasePins(250,0,500,300,"LEAF_CLK_IN",1,"C1",0.044,0.046,"bottom","l_r",5,1,"input"))
+    #all other bottom input pins
+    signal_names = df['Signal Name'].values
+    widths = df['Width'].values
+    x_start = 10
+    for signal,width in zip(signal_names,widths):
+        if width==1:
+            group.add(BasePins(x_start,0,500,300,signal,width,"C3",0.044,0.2,"bottom","l_r",5,1,"input"))
+            x_start += 5
+        else:
+             group.add(BasePins(x_start,0,500,300,signal,width,"C3",0.044,0.2,"bottom","l_r",5,width+1,"input"))
+             x_start = x_start + 5 + (width*.244)
     #endGroup = PinGroup(0.832)
     #endGroup.add(pin2)
     #endGroup.duplicateGroup(41)

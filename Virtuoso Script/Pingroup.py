@@ -130,7 +130,7 @@ class PinGroup:
                     variable_dimension = pin.origin_y
 
                     offset = i * (pin.w+pin.s)
-                    if pin.orient == "b_t":
+                    if pin.orient == "t_b":
                         offset = offset * -1
                     
                     x[i],y[i] = (fixed_dimension, variable_dimension + offset)
