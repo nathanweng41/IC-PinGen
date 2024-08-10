@@ -19,9 +19,9 @@ ADC_OUT<6> 500.000 190.909 JA right inputOutput 2.000 5.000
 ADC_OUT<7> 500.000 218.182 JA right inputOutput 2.000 5.000
 INPUT1 500.000 245.455 JA right inputOutput 2.000 5.000
 INPUT2 500.000 272.727 JA right inputOutput 2.000 5.000
-DVDD 0.000 75.000 OI left inputOutput 2.000 10.000
-macro_aout 0.000 150.000 OI left inputOutput 2.000 10.000
-macro_dout 0.000 225.000 OI left inputOutput 2.000 10.000
+DVDD 0.000 75.000 JA left inputOutput 2.000 10.000
+macro_aout 0.000 150.000 JA left inputOutput 2.000 10.000
+macro_dout 0.000 225.000 JA left inputOutput 2.000 10.000
 Ibias1u 35.714 0.000 OI bottom inputOutput 2.000 10.000
 AVDD2 71.429 0.000 OI bottom inputOutput 2.000 10.000
 VREF 107.143 0.000 OI bottom inputOutput 2.000 10.000
