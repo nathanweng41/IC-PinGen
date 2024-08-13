@@ -29,11 +29,11 @@ class BasePins:
 
     def duplicateWithOffset(self,iter_offset,spacing):
         if (self.orient == 'l_r' or self.orient == 'r_l'):
-            directionFactor = 1 if self.orient == "l_r" else -1 
+            directionFactor = 1
             new_x = self.origin_x + iter_offset * spacing * directionFactor
             return BasePins(new_x,self.origin_y,self.width,self.height,self.busname,self.buswidth,self.layer,self.w,self.s,self.edge,self.orient,self.extension,self.stop,self.direction)
         elif (self.orient == 'b_t' or self.orient == 't_b'):
-            directionFactor = 1 if self.orient == 'b_t' else -1
+            directionFactor = 1
             new_y = self.origin_y + iter_offset * spacing * directionFactor
             return BasePins(self.origin_x,new_y,self.width,self.height,self.busname,self.buswidth,self.layer,self.w,self.s,self.edge,self.orient,self.extension,self.stop,self.direction)
 

@@ -163,12 +163,12 @@ class PinGroup:
                         if pin.orient == "l_r": 
                             offset[i] = pin.origin_x + i * (pin.w + pin.s)  
                         else: 
-                            offset[i] = pin.origin_x + pin.width - i * (pin.w + pin.s)
+                            offset[i] = pin.origin_x - i * (pin.w + pin.s)
                     else:
                         if pin.orient == "b_t": 
                             offset[i] = pin.origin_y + i * (pin.w + pin.s) 
                         else: 
-                            offset[i] = pin.origin_y + pin.height - i * (pin.w + pin.s)
+                            offset[i] = pin.origin_y - i * (pin.w + pin.s)
 
                     pin_name = f"{pin.busname}[{i+base_index}]" if pin.buswidth > 1 or pin.stop != 1 else pin.busname
                     #pin_output = f"\t\t(pin name=\"{pin_name}\" )"
