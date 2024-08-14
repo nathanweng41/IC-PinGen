@@ -32,7 +32,7 @@ def main():
     out_fn = "C:/Users/natha/GitHub/IC-PinGen/output/"+current_file_name+"_out.txt"
 
     out_fh = open(out_fn,'w')
-    df = pd.read_excel('bits.xlsx',header=None)
+    df = pd.read_excel('updatedStandaloneBits.xlsx',header=None)
 
     #setting second row as header
     df.columns = df.iloc[1]
@@ -72,8 +72,23 @@ def main():
             pinStop = 1
         else:
             pinStop = row['Width']
-        pin = BasePins(x_origin,y_origin,width,height,row['Signal Name'],row['Width'],row['Layer'],row['PinWidth'],row['Spacing'],row['Side'],row['busdirection'],row['Pin Extension'],pinStop,row['PinLogical_Direction'])
-        group.add(pin)
+        if(row['Signal Name'] == "WL"):
+            groupWL = PinGroup(-row['L1 Group Pitch'])
+            pin = BasePins(x_origin,y_origin,width,height,"WL",8,row['Layer'],row['PinWidth'],row['Spacing'],row['Side'],row['busdirection'],row['Pin Extension'],row['Width'],row['PinLogical_Direction'])
+            groupWL.add(pin)
+            groupWL.duplicateGroup(42)
+            groupWL.newGroup(-row['L2 Group Pitch'])
+            groupWL.duplicateGroup(8)
+            group.add(groupWL)
+        elif(row['Signal Name'] == 'OFFSET_WL'):
+            groupOffset = PinGroup(-row['L1 Group Pitch'])
+            pin = BasePins(x_origin,y_origin,width,height,"OFFSET_WL",16,row['Layer'],row['PinWidth'],row['Spacing'],row['Side'],row['busdirection'],row['Pin Extension'],row['Width'],row['PinLogical_Direction'])
+            groupOffset.add(pin)
+            groupOffset.duplicateGroup(8)
+            group.add(groupOffset)
+        else:
+            pin = BasePins(x_origin,y_origin,width,height,row['Signal Name'],row['Width'],row['Layer'],row['PinWidth'],row['Spacing'],row['Side'],row['busdirection'],row['Pin Extension'],pinStop,row['PinLogical_Direction'])
+            group.add(pin)
     group.genOutput(out_fh,"virtuoso")
 
     #Block.addPins(pin2)
