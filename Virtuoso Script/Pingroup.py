@@ -114,7 +114,8 @@ class PinGroup:
             if((base_index+i) < pin.stop):
                 if(pin.edge=="bottom" or pin.edge == "top"):
                     lbor="R90"
-                    fixed_dimension = pin.origin_y if pin.edge == "bottom" else pin.height + pin.origin_y
+                    #fixed_dimension = pin.origin_y if pin.edge == "bottom" else pin.height + pin.origin_y
+                    fixed_dimension = pin.origin_y
                     variable_dimension = pin.origin_x
 
                     offset = i * (pin.w+pin.s)
@@ -126,7 +127,8 @@ class PinGroup:
 
                 elif (pin.edge == "left" or pin.edge == "right"):
                     lbor = "R0"
-                    fixed_dimension = pin.origin_x if pin.edge == "left" else pin.width + pin.origin_x
+                    #fixed_dimension = pin.origin_x if pin.edge == "left" else pin.width + pin.origin_x
+                    fixed_dimension = pin.origin_x
                     variable_dimension = pin.origin_y
 
                     offset = i * (pin.w+pin.s)
